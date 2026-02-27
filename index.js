@@ -8,24 +8,23 @@ import userRouter from "./routers/userRoute.js";
 
 const app = express();
 
-// Middlewares
 app.use(express.json());
 app.use(cors());
 
-// Test Route
 app.get("/", (req, res) => {
   res.send("API is running 🚀");
 });
 
-// Routes
 app.use("/api/users", userRouter);
 
-// Start Server
 const startServer = async () => {
   await dbConnect();
-  app.listen(process.env.PORT || 8080, () =>
-    console.log("Server Started 🚀")
-  );
+
+  const PORT = process.env.PORT || 8080;
+
+  app.listen(PORT, () => {
+    console.log(`Server Started on port ${PORT}`);
+  });
 };
 
 startServer();
